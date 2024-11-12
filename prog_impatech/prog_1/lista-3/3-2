@@ -1,0 +1,7 @@
+def isPalindrome(a):
+    inv = a[::-1]
+    if a == inv:
+        return True 
+    return False
+a = "ovo"
+print(isPalindrome(a))

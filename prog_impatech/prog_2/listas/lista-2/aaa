@@ -1,0 +1,35 @@
+Para \( c = 2 \) e \( N = 1000 \):
+
+\[
+N^2 + 1000 \cdot N = 2 \times 10^6
+\]
+
+\[
+2 \cdot N^2 = 2 \times 10^6
+\]
+
+Como dão o mesmo valor, está certo.
+
+Para \( c = 101 \) e \( N = 10 \):
+
+\[
+N^2 + 1000 \cdot N = 10100
+\]
+
+\[
+101 \cdot N^2 = 10100
+\]
+
+Como dão o mesmo valor, está certo.
+
+Para \( c = 1001 \) e \( N = 1 \):
+
+\[
+N^2 + 1000 \cdot N = 1001
+\]
+
+\[
+1001 \cdot N^2 = 1001
+\]
+
+Como dão o mesmo valor, está certo.

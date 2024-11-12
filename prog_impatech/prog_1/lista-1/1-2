@@ -1,0 +1,9 @@
+def sum_cummulative(a):
+    list = []
+    x = 0
+    for i in a:
+        x += i
+        list.append(x)
+    print(list)
+a = [1,2,3,4,5]
+sum_cummulative(a)

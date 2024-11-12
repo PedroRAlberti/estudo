@@ -1,0 +1,137 @@
+1)
+class no():
+    def __init__(self,valor,next):
+        self.valor = valor
+        self.next_no = next
+
+class lista_encadeada():
+    def __init__(self,head):
+        self.head = head
+        self.len = 1
+
+    def adicionar_no(self,no):
+        self.len += 1
+        if self.head is None:
+            self.head = no
+            return
+        next = self.head
+        while next.next_no is not None:
+            next = next.next_no
+        next.next_no = no
+
+    def achar_valor (self,indice):
+        if indice > self.len:
+            return None
+        contador = 1
+        next = self.head
+        while contador < indice:
+            next = next.next_no
+            contador += 1
+        return next.valor
+
+    def inverter(self):
+        lista_invertida = lista_encadeada(no(self.achar_valor(self.len),None))
+        contador = 1
+        while contador < self.len:
+            lista_invertida.adicionar_no(no(self.achar_valor(self.len - contador),None))
+            contador += 1
+        return lista_invertida
+    def print(self):
+        next = self.head
+        while next is not None:
+            print(next.valor, end = "->")
+            next = next.next_no
+
+2)cod_rom = ""
+cont_centena = 0
+cont_dezena = 0
+#estes sao os contadores de cada casa decimal.
+# a seguir, os contadores recebem seus respectivos valores
+while numero > 999:
+    cod_rom+= "M"
+    numero -= 1000
+while numero > 99:
+    cont_centena += 1
+    numero -= 100
+while numero > 9:
+    cont_dezena += 1
+    numero -= 10
+#agora, basta adicionar as letras referentes a cada casa decimal
+if cont_centena == 9:
+    cod_rom += "CM"
+elif cont_centena == 4:
+    cod_rom += "CD"
+elif cont_centena >= 5:
+    cod_rom += "D" + (cont_centena - 5)*"C"
+else:
+    cod_rom += cont_centena*"C"
+   
+if cont_dezena == 9:
+    cod_rom += "XC"
+elif cont_dezena == 4:
+    cod_rom += "XL"
+elif cont_dezena >= 5:
+    cod_rom += "L" + (cont_dezena - 5)*"X"
+else:
+    cod_rom += cont_dezena*"X"
+#e a casa das unidades também é o próprio número após aquele processo
+if numero == 9:
+    cod_rom += "IX"
+elif numero == 4:
+    cod_rom += "IV"
+elif numero >= 5:
+    cod_rom += "V" + (numero - 5)*"I"
+else:
+    cod_rom += numero*"I"
+print(cod_rom)
+
+#3a)
+def potencia(x: float, n: int):
+    contador = 0
+    valor_final = 1
+    #a ideia é fazer um loop de forma que 1 é multiplicado por "x" "n" vezes 
+    if n == 0:
+        valor_final = 1
+    if n > 0:
+        while contador < n:
+            valor_final *=x
+            contador += 1
+    if n < 0 :
+        while contador > n:
+            valor_final /= x
+            contador -= 1
+    return valor_final
+
+4
+lista = (1,1,2,2,3,4,4)
+def achar_o_numero_isolado(a):
+    #o uso do dicionario permite acessar especificamente aquela chave permitindo assim o código ter O(n)
+    dict = {} 
+    for i in a:
+        #caso o numero já esteja no dicionário ele retira esta chave e caso não cria e dar valor 1. pois assim o único restante é aquele que só aparece uma vez
+        if i not in dict:
+            dict[i] = 1
+        else:
+            dict.pop(i)
+    return list(dict.keys())[0]
+print(achar_o_numero_isolado(lista))
+
+5
+def longest_prefix(a):
+    solução = ""
+    quantidade_de_strings = len(a)
+    quantidade_de_letras_na_primeira_string = len(a[0])
+    interrupt = False
+    #a ideia é achar qual o índice da letra que é diferente e depois retornar qualquer string, a primeira foi escolhida arbitrariamente.
+    for i in range(quantidade_de_letras_na_primeira_string):
+        if interrupt:
+            break
+        for j in range(1,quantidade_de_strings):
+            if lista[0][i] != lista[j][i]:
+                letra_limite = i
+                interrupt = True
+                break
+    for i in range(letra_limite):
+        solução = solução + (a[0][i])
+    return solução
+#o pior caso depende de 2 variaveis, o numero N de caracteres na primeira string e o numero M de strings. sendo assim, a complexidade é O(NM)

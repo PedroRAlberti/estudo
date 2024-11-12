@@ -1,0 +1,9 @@
+def nested_sum(a):
+    soma = 0
+    sub = []
+    for i in a:
+        for j in i :
+            soma += j
+    print (soma)
+a = [[1,2],[3],[4,5,6]]
+nested_sum(a)
