@@ -35,6 +35,7 @@ print(find_judge(n, t))  # Saída esperada: -1
 import heapq
 
 # Classe para representar um grafo\class Graph:
+class Graph():
     def __init__(self, vertices):
         self.V = vertices  # Número de vértices
         self.graph = []  # Lista de arestas
