@@ -31,11 +31,11 @@ int main() {
         {
             auxv = mp[i];
             auxq = 1;
-            st.empty();
+            st.clear();
             st.insert(i);
         }
 
-        if  (mp[i] == auxv)
+        else if  (mp[i] == auxv)
         {
             auxq += 1;
             st.insert(i);

@@ -1,43 +1,46 @@
 #include <iostream>
+#include <map>
+#include <set>
 
 using namespace std;
 
 int main() {
-    int v[10], min = 100, x, Oco = 0, ind[10];
+    map<int, set<int>> mp; // Mapeia cada índice a um conjunto de inteiros
+    set<int> r;            // Armazena os índices cujos conjuntos ficaram vazios
 
-    // Leitura do vetor e cálculo do menor elemento
-    for (int i = 0; i < 10; i++) {
-        cin >> x;
+    int N, K, U, x;
+    cin >> N >> K >> U;
 
-        if (x < min) {
-            // Novo menor encontrado
-            min = x;
-            Oco = 1;  // Reseta o contador de ocorrências para 1
-            ind[0] = i;  // Salva o índice do menor
-        } else if (x == min) {
-            // Outra ocorrência do menor
-            ind[Oco] = i;  // Salva o índice
-            Oco++;
+    // Leitura dos conjuntos iniciais
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < K; j++) {
+            cin >> x;
+            mp[i].insert(x);
         }
-
-        v[i] = x;  // Armazena o valor no vetor principal
     }
 
-    // Substituir os menores valores por -1
-    for (int i = 0; i < Oco; i++)
-        v[ind[i]] = -1;
+    // Processamento das atualizações
+    for (int i = 0; i < U; i++) {
+        for (int j = 0; j < N; j++) {
+            cin >> x;
 
-    // Exibir resultados
-    cout << "Menor: " << min << endl;
+            // Verifica se o valor está no conjunto e o remove
+            auto it = mp[j].find(x);
+            if (it != mp[j].end()) {
+                mp[j].erase(it);
+            }
 
-    cout << "Ocorrencias: ";
-    for (int i = 0; i < Oco; i++)
-        cout << ind[i] << " ";
-    cout << endl;
+            // Se o conjunto ficar vazio, adiciona o índice a `r`
+            if (mp[j].empty() && r.find(j) == r.end()) {
+                r.insert(j);
+            }
+        }
+    }
 
-    cout << "Vetor atualizado: ";
-    for (int i = 0; i < 10; i++)
-        cout << v[i] << " ";
+    // Imprime os índices cujos conjuntos ficaram vazios
+    for (auto idx : r) {
+        cout << idx << " ";
+    }
     cout << endl;
 
     return 0;
